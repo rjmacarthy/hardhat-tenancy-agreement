@@ -10,8 +10,8 @@ contract Base {
         address tenant;
         address landlord;
         string propertyAddress;
-        uint256 startTime;
-        uint256 endTime;
+        uint256 startBlock;
+        uint256 endBlock;
         uint256 amount;
         uint256 balance;
         AgreementStatus status;

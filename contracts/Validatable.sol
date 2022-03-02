@@ -22,8 +22,8 @@ contract Validatable is Base {
         require(agreement.tenant != address(0x0), "Invalid address");
         require(agreement.landlord != address(0x0), "Invalid address");
         require(agreement.amount > 0, "Invalid amount");
-        require(agreement.startTime > 0, "Invalid start time");
-        require(agreement.endTime > 0, "Invalid end time");
+        require(agreement.startBlock > 0, "Invalid start time");
+        require(agreement.endBlock > 0, "Invalid end time");
     }
 
 }

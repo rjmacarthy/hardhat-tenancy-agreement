@@ -11,10 +11,10 @@ contract Contract is Ownable, Validatable {
         return address(this).balance;
     }
 
-    function newAgreement (address _tenant, address _landlord, string memory _propertyAddress, uint256 _startTime, uint256 _endTime, uint256 _amount) 
+    function newAgreement (address _tenant, address _landlord, string memory _propertyAddress, uint256 _startBlock, uint256 _endBlock, uint256 _amount) 
     public returns (uint) {
         id = id + 1;
-        Agreement memory agreement = Agreement(_tenant, _landlord, _propertyAddress, _startTime, _endTime, _amount, 0, AgreementStatus.Pending);
+        Agreement memory agreement = Agreement(_tenant, _landlord, _propertyAddress, _startBlock, _endBlock, _amount, 0, AgreementStatus.Pending);
         validateNewAgreement(agreement);
         agreements[id] = agreement;
         return id;
@@ -29,8 +29,8 @@ contract Contract is Ownable, Validatable {
             agreement.tenant, 
             agreement.landlord, 
             agreement.propertyAddress, 
-            agreement.startTime,
-            agreement.endTime,
+            agreement.startBlock,
+            agreement.endBlock,
             agreement.amount,
             agreement.balance,
             agreement.status
@@ -46,13 +46,13 @@ contract Contract is Ownable, Validatable {
         return true;
     }
 
-    function payLandlord (uint _id) public isTenantOrOwner(_id) canFinalise(_id) returns (bool) {
+    function payLandlord (uint _id) public isTenantOrOwner(_id) canFinalise(_id) returns (uint) {
         Agreement storage agreement = agreements[_id];
-        require(block.number >= agreement.endTime, "Agreement ended");
+        require(block.number  >= agreement.endBlock, "Agreement ended");
         payable(agreement.landlord).transfer(agreement.balance);
         agreement.status = AgreementStatus.Complete;
         agreement.balance = 0;
-        return true;
+        return block.number;
     }
 
 }

@@ -50,7 +50,8 @@ describe('Contract', () => {
   })
 
   it('can pay ether into an agreement', async () => {
-    await contract.payAgreement(1, { value: web3.utils.toWei('0.5', 'ether') })
+    const result = await contract.payAgreement(1, { value: web3.utils.toWei('0.5', 'ether') })
+    console.log(result)
   })
 
   it('can pay up to the agreement amount', async () => {
