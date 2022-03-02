@@ -2,7 +2,6 @@ const { expect } = require('chai')
 const { BigNumber } = require('ethers')
 const { ethers } = require('hardhat')
 const Web3 = require('web3')
-require('@nomiclabs/hardhat-waffle')
 
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545/'))
 let contract
