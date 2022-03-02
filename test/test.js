@@ -8,7 +8,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545/'))
 let contract
 let accounts
 
-describe('Contract', function () {
+describe('Contract', () => {
   before(async () => {
     const Contract = await ethers.getContractFactory('Contract')
     contract = await Contract.deploy()
